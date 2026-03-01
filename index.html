@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manifested Bank - Dubai 🌸</title>
+    <!-- Tailwind CSS for that clean Opay-inspired look -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #FFE4E1; /* Soft pink everywhere */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Header: Pink gradient, Opay-style simple top bar -->
+    <header class="bg-gradient-to-r from-pink-500 to-pink-300 text-white py-4 shadow-md">
+        <div class="container mx-auto px-4 flex items-center justify-between">
+            <h1 class="text-2xl font-bold">Manifested Bank 🌸💖</h1>
+            <p class="text-sm">Dubai's Cute Digital Bank 🕌</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-10 max-w-md">
+
+        <!-- Username Input Section (shows first) -->
+        <section id="username-section" class="bg-white p-8 rounded-2xl shadow-xl text-center">
+            <h2 class="text-2xl font-bold text-pink-600 mb-6">Welcome to Manifested! 💕</h2>
+            <p class="text-gray-600 mb-4">Type your username to see your balance</p>
+            
+            <input 
+                type="text" 
+                id="username-input" 
+                class="w-full p-4 border-2 border-pink-300 rounded-xl text-center text-lg focus:outline-none focus:border-pink-500 mb-6" 
+                placeholder="Your username (e.g. Nato)" 
+                required
+            >
+            
+            <button 
+                id="submit-username" 
+                class="w-full bg-pink-500 text-white py-4 rounded-xl font-bold text-lg hover:bg-pink-600 transition"
+            >
+                Show My Balance 🌷
+            </button>
+        </section>
+
+        <!-- Dashboard Section (hidden until username submitted) -->
+        <section id="dashboard" class="hidden">
+            <!-- Big Balance Card – Opay style, pink version -->
+            <div class="bg-gradient-to-br from-pink-600 to-pink-400 text-white p-8 rounded-2xl shadow-2xl mb-8 text-center">
+                <p class="text-xl opacity-90 mb-2">Hi, <span id="display-username" class="font-bold"></span>!</p>
+                <p class="text-lg opacity-90">Available Balance</p>
+                <p class="text-5xl font-extrabold mt-3" id="balance">$100.00</p>
+                <p class="text-sm mt-3 opacity-80">Ready to manifest more in Dubai! 💸🕌</p>
+            </div>
+
+            <!-- Quick Action Buttons – grid like Opay -->
+            <div class="grid grid-cols-2 gap-5 mb-10">
+                <button id="withdraw-btn" class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition text-center">
+                    <span class="text-4xl block mb-3">💰</span>
+                    <span class="font-semibold text-pink-600 block">Withdraw</span>
+                </button>
+                <button id="send-btn" class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition text-center">
+                    <span class="text-4xl block mb-3">❤️</span>
+                    <span class="font-semibold text-pink-600 block">Send Money</span>
+                </button>
+            </div>
+
+            <!-- Cute footer vibe -->
+            <div class="bg-pink-100 p-6 rounded-2xl text-center">
+                <p class="text-pink-600 font-medium">Manifested Magic 🌸</p>
+                <p class="text-sm text-gray-600">Bank cute, bank smart in Dubai! 💖</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-pink-200 text-center py-4 text-sm text-gray-600 mt-10">
+        © 2026 Manifested Bank, Dubai 🌸 | Dream Big, Bank Pink
+    </footer>
+
+    <!-- JavaScript – this makes the "pages" switch and balance update! -->
+    <script>
+        let fakeBalance = 100; // Starts at $100.00
+
+        // When submit button clicked (or you can press Enter in input)
+        document.getElementById('submit-username').addEventListener('click', () => {
+            const username = document.getElementById('username-input').value.trim();
+            
+            if (username === '') {
+                alert('Oops! Type your username first cutie 😊');
+                return;
+            }
+
+            // Show username in dashboard
+            document.getElementById('display-username').textContent = username;
+
+            // Hide input, show dashboard
+            document.getElementById('username-section').classList.add('hidden');
+            document.getElementById('dashboard').classList.remove('hidden');
+
+            // Update balance display
+            document.getElementById('balance').textContent = `$${fakeBalance.toFixed(2)}`;
+
+            alert(`Welcome ${username}! Your balance is ready 💕`);
+        });
+
+        // Withdraw button
+        document.getElementById('withdraw-btn').addEventListener('click', () => {
+            const amount = prompt('How much to withdraw? 💸');
+            const num = parseFloat(amount);
+            if (num > 0 && num <= fakeBalance) {
+                fakeBalance -= num;
+                document.getElementById('balance').textContent = `$${fakeBalance.toFixed(2)}`;
+                alert(`Withdrew $${num}! New balance: $${fakeBalance.toFixed(2)} 🌸`);
+            } else {
+                alert('Invalid amount or not enough funds! Try again 💖');
+            }
+        });
+
+        // Send button
+        document.getElementById('send-btn').addEventListener('click', () => {
+            const recipient = prompt('Send to who? 👭');
+            const amount = prompt('How much? ❤️');
+            const num = parseFloat(amount);
+            if (recipient && num > 0 && num <= fakeBalance) {
+                fakeBalance -= num;
+                document.getElementById('balance').textContent = `$${fakeBalance.toFixed(2)}`;
+                alert(`Sent $${num} to ${recipient}! You're the best 💕`);
+            } else {
+                alert('Oops, check details! 😉');
+            }
+        });
+    </script>
+
+</body>
+</html>
